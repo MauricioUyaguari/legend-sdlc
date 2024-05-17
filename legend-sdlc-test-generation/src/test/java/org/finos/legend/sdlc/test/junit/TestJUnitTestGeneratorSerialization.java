@@ -21,7 +21,7 @@ import org.finos.legend.sdlc.serialization.EntityLoader;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
@@ -37,8 +37,8 @@ import java.util.stream.Stream;
 
 public class TestJUnitTestGeneratorSerialization extends AbstractGenerationTest
 {
-    @ClassRule
-    public static final TemporaryFolder TMP_DIR = new TemporaryFolder();
+    @Rule
+    public final TemporaryFolder TMP_DIR = new TemporaryFolder();
 
     private static EntityLoader ENTITY_LOADER;
 
@@ -61,19 +61,19 @@ public class TestJUnitTestGeneratorSerialization extends AbstractGenerationTest
     @Test
     public void testWriteTestClassesWithoutRootPackage() throws IOException
     {
-        testWriteTestClasses(null, "generated/java/execution/TestRelationalMapping.java", "generated/java/execution/TestRelationalMapping.java", "generated/java/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/model/mapping/TestSourceToTargetM2M.java", "generated/java/testTestSuites/TestTestService.java", "generated/java/testTestSuites/TestTestService2.java", "generated/java/testTestSuites/TestServiceStoreMapping.java", "generated/java/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryV_38d23576.java", "generated/java/testTestSuites/TestMyServiceIsââVeryââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryââââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVe_a0bb3f4b.java");
+        testWriteTestClasses(null, "generated/java/execution/TestRelationalMapping.java", "generated/java/execution/TestRelationalMapping.java", "generated/java/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/model/mapping/TestSourceToTargetM2M.java", "generated/java/testTestSuites/TestTestService.java", "generated/java/testTestSuites/TestTestService2.java", "generated/java/testTestSuites/TestServiceStoreMapping.java", "generated/java/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVery_38d23576.java");
     }
 
     @Test
     public void testWriteTestClasses() throws IOException
     {
-        testWriteTestClasses("org.finos.legend.sdlc.test.junit.junit4", "generated/java/org/finos/legend/sdlc/test/junit/junit4/execution/TestRelationalMapping.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/model/mapping/TestSourceToTargetM2M.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestTestService.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestTestService2.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestServiceStoreMapping.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryV_38d23576.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestMyServiceIsââVeryââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryââââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVe_a0bb3f4b.java");
+        testWriteTestClasses("org.finos.legend.sdlc.test.junit.junit4", "generated/java/org/finos/legend/sdlc/test/junit/junit4/execution/TestRelationalMapping.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/model/mapping/TestSourceToTargetM2M.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestTestService.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestTestService2.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestServiceStoreMapping.java", "generated/java/org/finos/legend/sdlc/test/junit/junit4/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVery_38d23576.java");
     }
 
     @Test
     public void testWriteTestClassesOtherPackage() throws IOException
     {
-        testWriteTestClasses("other.test.pkg", "generated/java/other/test/pkg/execution/TestRelationalMapping.java", "generated/java/other/test/pkg/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/other/test/pkg/model/mapping/TestSourceToTargetM2M.java", "generated/java/other/test/pkg/testTestSuites/TestTestService.java", "generated/java/other/test/pkg/testTestSuites/TestTestService2.java", "generated/java/other/test/pkg/testTestSuites/TestServiceStoreMapping.java", "generated/java/other/test/pkg/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryV_38d23576.java", "generated/java/other/test/pkg/testTestSuites/TestMyServiceIsââVeryââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryââââVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVe_a0bb3f4b.java");
+        testWriteTestClasses("other.test.pkg", "generated/java/other/test/pkg/execution/TestRelationalMapping.java", "generated/java/other/test/pkg/legend/demo/TestSingleQuoteInResultM2M.java", "generated/java/other/test/pkg/model/mapping/TestSourceToTargetM2M.java", "generated/java/other/test/pkg/testTestSuites/TestTestService.java", "generated/java/other/test/pkg/testTestSuites/TestTestService2.java", "generated/java/other/test/pkg/testTestSuites/TestServiceStoreMapping.java", "generated/java/other/test/pkg/testTestSuites/TestMyServiceIsVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVery_38d23576.java");
     }
 
     private void testWriteTestClasses(String rootPackage, String... expectedResources) throws IOException
@@ -89,7 +89,7 @@ public class TestJUnitTestGeneratorSerialization extends AbstractGenerationTest
 
         // Generate
         JUnitTestGenerator generator = JUnitTestGenerator.newGenerator(rootPackage);
-        Path outputDir = TMP_DIR.newFolder().toPath();
+        Path outputDir = TMP_DIR.getRoot().toPath();
         List<Path> reportedPaths = generator.writeTestClasses(outputDir, ENTITY_LOADER.getAllEntities());
         List<Path> foundPaths = Lists.mutable.empty();
         SortedMap<String, String> actual = SortedMaps.mutable.empty();
