@@ -1,0 +1,48 @@
+stages:
+  - prepare
+  - build
+
+variables:
+  DEPLOY_PATH: "/path/to/deploy"
+
+prepare:
+  stage: prepare
+  script:
+    - echo "Preparing the environment..."
+
+generate_child_pipeline:
+  stage: prepare
+  script:
+    - echo "Generating child pipeline..."
+    - |
+      cat <<EOF > generated_child_pipeline.yml
+      stages:
+        - test
+        - deploy
+
+      test:
+        stage: test
+        script:
+          - echo "Running tests..."
+          - ./run-tests.sh
+
+      deploy:
+        stage: deploy
+        script:
+          - echo "Deploying..."
+          - ./deploy.sh
+      EOF
+  artifacts:
+    paths:
+      - generated_child_pipeline.yml
+
+include_child_pipeline:
+  stage: build
+  script:
+    - echo "Including child pipeline..."
+  needs:
+    - job: generate_child_pipeline
+  trigger:
+    include:
+      - artifact: generate_child_pipeline
+        file: generated_child_pipeline.yml
