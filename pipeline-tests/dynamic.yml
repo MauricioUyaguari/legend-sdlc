@@ -1,0 +1,60 @@
+stages:
+  - prepare
+  - build
+
+prepare:
+  stage: prepare
+  script:
+    - echo "Preparing the environment..."
+    - echo "This is a dynamically generated file." > dynamic_file.txt
+  artifacts:
+    paths:
+      - dynamic_file.txt
+
+generate_child_pipeline:
+  stage: build
+  script:
+    - echo "Generating child pipeline configuration..."
+    - |
+      cat <<EOF > generated_child_pipeline.yml
+      stages:
+        - test
+        - deploy
+
+      include:
+        - local: '/.common-jobs.yml'
+
+      dynamic_job:
+        stage: test
+        script:
+          - echo "Using the dynamic file from the parent pipeline:"
+          - cat dynamic_file.txt
+      EOF
+  artifacts:
+    paths:
+      - generated_child_pipeline.yml
+
+include_child_pipeline:
+  stage: build
+  script:
+    - echo "Triggering child pipeline..."
+  needs:
+    - job: generate_child_pipeline
+  trigger:
+    include:
+      - artifact: generate_child_pipeline
+        file: generated_child_pipeline.yml
+    strategy: depend
+
+
+# .common-jobs.yml
+
+.default:
+  image: alpine
+  tags:
+    - docker
+
+dynamic_job:
+  extends: .default
+  script:
+    - echo "This job will be extended by the child pipeline."
