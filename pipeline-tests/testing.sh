@@ -53,3 +53,11 @@ test-job:
   artifacts:
     reports:
       junit: test-results/junit.xml
+
+
+if [ -n "$(find /path/to/directory -mindepth 1 -print -quit)" ]; then
+  echo "Directory is not empty"
+else
+  echo "Directory is empty"
+fi
+
